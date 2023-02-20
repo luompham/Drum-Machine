@@ -1,3 +1,46 @@
-body {
-    color: red
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+
+    .drum-pad-container {
+        width: 670px;
+        margin: auto;
+        background-color: #b3b3b3;
+
+        .pad-bank {
+
+            width: 335px;
+            margin: 20px 30px;
+            height: 275px;
+            // background-color: aqua;
+
+
+            .drum-pad {
+                float: left;
+                background-color: grey;
+                width: 100px;
+                height: 80px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 11px;
+                margin-top: 9px;
+                box-shadow: 3px 3px 5px;
+                border-radius: 3px;
+
+                span {
+
+                    display: inline-block;
+                }
+            }
+        }
+    }
 }
