@@ -13,6 +13,7 @@
         width: 670px;
         margin: auto;
         background-color: #b3b3b3;
+        display: flex;
 
         .pad-bank {
 
@@ -47,5 +48,50 @@
                 }
             }
         }
+
+
+        .control-wrapper {
+
+
+
+            .control_power {
+
+                .select {
+                    width: 54px;
+                    height: 25px;
+                    background-color: black;
+                    margin-bottom: 20px;
+
+
+
+                    .select-on-off {
+                        width: 23px;
+                        height: 19px;
+                        background-color: blue;
+                        margin: auto;
+                        // float: left;
+
+                    }
+                }
+
+            }
+
+
+            .control_display {
+                width: 200px;
+                height: 30px;
+                background-color: aquamarine;
+
+
+            }
+
+
+
+        }
+
+
+
+
     }
+
 }

@@ -13,6 +13,7 @@
   width: 670px;
   margin: auto;
   background-color: #b3b3b3;
+  display: flex;
 }
 .app-wrapper .drum-pad-container .pad-bank {
   width: 335px;
@@ -38,6 +39,23 @@
 }
 .app-wrapper .drum-pad-container .pad-bank .drum-pad span {
   display: inline-block;
+}
+.app-wrapper .drum-pad-container .control-wrapper .control_power .select {
+  width: 54px;
+  height: 25px;
+  background-color: black;
+  margin-bottom: 20px;
+}
+.app-wrapper .drum-pad-container .control-wrapper .control_power .select .select-on-off {
+  width: 23px;
+  height: 19px;
+  background-color: blue;
+  margin: auto;
+}
+.app-wrapper .drum-pad-container .control-wrapper .control_display {
+  width: 200px;
+  height: 30px;
+  background-color: aquamarine;
 }
 
 /*# sourceMappingURL=style.css.map */
