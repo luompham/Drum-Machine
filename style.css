@@ -19,6 +19,9 @@
   margin: 20px 30px;
   height: 275px;
 }
+.app-wrapper .drum-pad-container .pad-bank :hover {
+  cursor: pointer;
+}
 .app-wrapper .drum-pad-container .pad-bank .drum-pad {
   float: left;
   background-color: grey;

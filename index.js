@@ -3,7 +3,58 @@ class App extends React.Component {
     constructor(props) {
         super(props)
 
+        this.playAudio = this.playAudio.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
 
+        this.handleKeyDown = this.handleKeyDown.bind(this)
+    }
+
+    playAudio(event) {
+        console.log(event.target.children[1]);
+        // console.log(event.target.querySelector('audio'));
+        const audioElement = event.target.children[1];
+
+        audioElement.play();
+
+    }
+
+    handleKeyDown(event) {
+
+
+        let key = event.key.toUpperCase();
+
+        // let indexDiv = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        const objDiv = document.querySelectorAll('.drum-pad')
+
+        for (let indexDiv = 0; indexDiv < 9; indexDiv++) {
+
+            let innerText = objDiv[indexDiv].children[0].innerText;
+            if (key === innerText) {
+                console.log('true')
+            } else {
+                console.log('false')
+
+            }
+        }
+
+
+
+
+
+    }
+
+
+
+    componentDidMount() {
+        // Focus on the rendered div using the DOM focus() method
+        window.addEventListener('keydown', this.handleKeyDown);
+
+
+    }
+
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
     }
 
     render() {
@@ -17,7 +68,7 @@ class App extends React.Component {
 
                     <div className="pad-bank">
 
-                        <div className="drum-pad" id="Heater 1"><span>Q</span>
+                        <div onClick={this.playAudio} className="drum-pad" id="Heater 1"><span>Q</span>
                             <audio className="clip" id="Q" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>
                         </div>
 

@@ -19,7 +19,10 @@
             width: 335px;
             margin: 20px 30px;
             height: 275px;
-            // background-color: aqua;
+
+            :hover {
+                cursor: pointer;
+            }
 
 
             .drum-pad {
@@ -35,6 +38,8 @@
                 margin-top: 9px;
                 box-shadow: 3px 3px 5px;
                 border-radius: 3px;
+
+
 
                 span {
 
