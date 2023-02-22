@@ -12,6 +12,7 @@ class App extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleClickPower = this.handleClickPower.bind(this);
+        this.changeVolume = this.changeVolume.bind(this);
     }
 
     playAudio(event) {
@@ -24,6 +25,8 @@ class App extends React.Component {
             this.setState({
                 audioId: event.target.id
             })
+
+            console.log(audioElement.volume)
 
         } else {
 
@@ -80,7 +83,13 @@ class App extends React.Component {
             audioId: ''
         });
 
-        console.log(this.state.power)
+        // console.log(this.state.power)
+
+    }
+
+    changeVolume(event) {
+
+        console.log(event.target.value)
 
     }
 
@@ -99,6 +108,17 @@ class App extends React.Component {
 
     render() {
 
+        const arrLetter = [['Q', 'Heater-1'], ['W', 'Heater-2'], ['E', 'Heater-3'], ['A', 'Heater-4_1'], ['S', 'Heater-6'], ['D', 'Dsc_Oh'], ['Z', 'Kick_n_Hat'], ['X', 'RP4_KICK_1'], ['C', 'Cev_H2']];
+
+        const listItems = arrLetter.map((item) => {
+            return (
+                <div key={item[1]} onClick={this.playAudio} className={`drum-pad ${this.state.power ? 'drum-pad-power-on' : 'drum-pad-power-off'}`} id={item[1]}>{item[0]}
+                    <audio key={item[0]} className="clip" id={item[0]} src={`https://s3.amazonaws.com/freecodecamp/drums/${item[1]}.mp3`}></audio>
+                </div>
+            )
+        });
+
+
 
         return (
             <div className="app-wrapper" id="drum-machine">
@@ -106,46 +126,8 @@ class App extends React.Component {
 
                 <div className="drum-pad-container">
 
-                    <div className="pad-bank">
+                    <div className="pad-bank">{listItems}</div>
 
-                        <div onClick={this.playAudio} className="drum-pad" id="Heater 1">Q
-                            <audio className="clip" id="Q" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Heater 2">W
-                            <audio className="clip" id="W" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Heater 3">E
-                            <audio className="clip" id="E" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Heater 4">A
-                            <audio className="clip" id="A" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Clap">S
-                            <audio className="clip" id="S" src="https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Open-HH">D
-                            <audio className="clip" id="D" src="https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Kick-n'-Hat">Z
-                            <audio className="clip" id="Z" src="https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Kick">X
-                            <audio className="clip" id="X" src="https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3"></audio>
-                        </div>
-
-                        <div onClick={this.playAudio} className="drum-pad" id="Closed-HH">C
-                            <audio className="clip" id="C" src="https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3"></audio>
-                        </div>
-
-
-                    </div>
 
                     <div className="logo">
 
@@ -155,12 +137,16 @@ class App extends React.Component {
 
                         <div className="control_power">
                             <div>Power</div>
-                            <div onClick={this.handleClickPower} className="select">
-                                <div style={{ 'float': this.state.power ? 'right' : 'left' }} className="select-on-off"></div>
+                            <div onClick={this.handleClickPower} style={{ 'justifyContent': this.state.power ? 'flex-end' : 'flex-start' }} className="select">
+                                <div className="select-on-off"></div>
                             </div>
                         </div>
 
                         <div className="control_display" id="display">{this.state.audioId}</div>
+
+                        <div className="control_volume">
+                            <input onChange={this.changeVolume} type="range" min="0" step="0.01" max="1"></input>
+                        </div>
 
                     </div>
 
