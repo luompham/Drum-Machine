@@ -6,6 +6,8 @@ class App extends React.Component {
         this.state = {
             audioId: '',
             power: true,
+            audioVolume: '',
+            playMode: false,
         }
 
         this.playAudio = this.playAudio.bind(this);
@@ -13,6 +15,8 @@ class App extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleClickPower = this.handleClickPower.bind(this);
         this.changeVolume = this.changeVolume.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.handleClickPlayMode = this.handleClickPlayMode.bind(this);
     }
 
     playAudio(event) {
@@ -21,12 +25,14 @@ class App extends React.Component {
 
             const audioElement = event.target.querySelector('audio');
             audioElement.play();
+            audioElement.volume = this.state.audioVolume
 
+            console.log(this.state.audioVolume)
             this.setState({
                 audioId: event.target.id
             })
 
-            console.log(audioElement.volume)
+            // console.log(audioElement.volume)
 
         } else {
 
@@ -42,24 +48,34 @@ class App extends React.Component {
 
         let key = event.key.toUpperCase();
 
-        const audioElement = document.querySelectorAll(`#${key}`)[0];
-
-        // console.log(document.getElementById(key).parentElement.id)
-
-        const audioId = document.getElementById(key).parentElement.id
+        const audioElement = document.getElementById(key);
+        //console.log(audioElement)
 
         if (audioElement) {
 
-            //  console.log(this.state.power);
+            const audioId = document.getElementById(key).parentElement.id;
+
             if (this.state.power) {
+
+                const divElement = document.getElementById(key).parentElement;
+
 
                 this.setState({
                     audioId: audioId
                 });
 
                 audioElement.play();
+                audioElement.volume = this.state.audioVolume
+
+
+                divElement.style.backgroundColor = 'red';
+                divElement.style.transform = 'scale(0.9)';
+
+                document.addEventListener('keyup', this.handleKeyUp)
 
             } else {
+                const divElement = document.getElementById(key).parentElement;
+                divElement.style.transform = 'scale(0.9)';
 
                 return;
             }
@@ -67,6 +83,29 @@ class App extends React.Component {
 
         } else {
             //  console.log('not found audio element');
+            return;
+        }
+
+
+
+    }
+
+
+    handleKeyUp(event) {
+
+        const key = event.key.toUpperCase();
+
+        const audioElement = document.getElementById(key);
+
+
+        if (audioElement) {
+
+            const divElement = document.getElementById(key).parentElement;
+
+            divElement.style.backgroundColor = '';
+            divElement.style.transform = '';
+
+        } else {
             return;
         }
 
@@ -83,13 +122,70 @@ class App extends React.Component {
             audioId: ''
         });
 
-        // console.log(this.state.power)
 
     }
 
     changeVolume(event) {
 
-        console.log(event.target.value)
+
+        if (this.state.power) {
+
+            this.setState({
+                audioVolume: event.target.value,
+                audioId: `Volume: ${parseInt(event.target.value * 100)}`
+            });
+
+
+
+            setTimeout(() => {
+                this.setState({
+
+                    audioId: ''
+                })
+            }
+                , 1000);
+
+            // setTimeout(function () {
+            //     this.setState({
+
+            //         audioId: ''
+            //     })
+            // }.bind(this)
+
+            //     , 1000);
+
+
+
+        } else {
+
+            return;
+
+        }
+
+
+    }
+
+
+    handleClickPlayMode() {
+
+        this.setState({
+            playMode: !this.state.playMode,
+
+        })
+
+        if (this.state.playMode) {
+
+            this.setState({
+                audioId: 'Heater Kit'
+            })
+
+        } else {
+            this.setState({
+                audioId: 'Smooth Piano Kit'
+            })
+        }
+
+        console.log(this.state.playMode);
 
     }
 
@@ -97,6 +193,9 @@ class App extends React.Component {
     componentDidMount() {
         // Focus on the rendered div using the DOM focus() method
         window.addEventListener('keydown', this.handleKeyDown);
+        this.setState({
+            audioVolume: 0.3
+        });
 
 
     }
@@ -108,9 +207,13 @@ class App extends React.Component {
 
     render() {
 
-        const arrLetter = [['Q', 'Heater-1'], ['W', 'Heater-2'], ['E', 'Heater-3'], ['A', 'Heater-4_1'], ['S', 'Heater-6'], ['D', 'Dsc_Oh'], ['Z', 'Kick_n_Hat'], ['X', 'RP4_KICK_1'], ['C', 'Cev_H2']];
+        const HeaterMode = [['Q', 'Heater-1'], ['W', 'Heater-2'], ['E', 'Heater-3'], ['A', 'Heater-4_1'], ['S', 'Heater-6'], ['D', 'Dsc_Oh'], ['Z', 'Kick_n_Hat'], ['X', 'RP4_KICK_1'], ['C', 'Cev_H2']];
 
-        const listItems = arrLetter.map((item) => {
+        const SmoothMode = [['Q', 'Chord_1'], ['W', 'Chord_2'], ['E', 'Chord_3'], ['A', 'Give_us_a_light'], ['S', 'Dry_Ohh'], ['D', 'Bld_H1'], ['Z', 'punchy_kick_1'], ['X', 'side_stick_1'], ['C', 'Brk_Snr']];
+
+
+
+        const SmoothList = SmoothMode.map((item) => {
             return (
                 <div key={item[1]} onClick={this.playAudio} className={`drum-pad ${this.state.power ? 'drum-pad-power-on' : 'drum-pad-power-off'}`} id={item[1]}>{item[0]}
                     <audio key={item[0]} className="clip" id={item[0]} src={`https://s3.amazonaws.com/freecodecamp/drums/${item[1]}.mp3`}></audio>
@@ -120,13 +223,26 @@ class App extends React.Component {
 
 
 
+
+        const HeaterList = HeaterMode.map((item) => {
+            return (
+                <div key={item[1]} onClick={this.playAudio} className={`drum-pad ${this.state.power ? 'drum-pad-power-on' : 'drum-pad-power-off'}`} id={item[1]}>{item[0]}
+                    <audio key={item[0]} className="clip" id={item[0]} src={`https://s3.amazonaws.com/freecodecamp/drums/${item[1]}.mp3`}></audio>
+                </div>
+            )
+        });
+
+
+
+
+
         return (
             <div className="app-wrapper" id="drum-machine">
 
 
                 <div className="drum-pad-container">
 
-                    <div className="pad-bank">{listItems}</div>
+                    <div className="pad-bank">{this.state.playMode ? SmoothList : HeaterList}</div>
 
 
                     <div className="logo">
@@ -145,7 +261,16 @@ class App extends React.Component {
                         <div className="control_display" id="display">{this.state.audioId}</div>
 
                         <div className="control_volume">
-                            <input onChange={this.changeVolume} type="range" min="0" step="0.01" max="1"></input>
+                            <input id="volumnId" onChange={this.changeVolume} value={this.state.audioVolume} type="range" min="0" step="0.01" max="1"></input>
+                        </div>
+
+                        <div className="control_play-mode control_power">
+                            <div>Bank</div>
+
+                            <div onClick={this.handleClickPlayMode} style={{ 'justifyContent': this.state.playMode ? 'flex-end' : 'flex-start' }} className="select">
+                                <div className="select-on-off"></div>
+                            </div>
+
                         </div>
 
                     </div>
