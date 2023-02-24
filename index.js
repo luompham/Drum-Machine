@@ -68,7 +68,7 @@ class App extends React.Component {
                 audioElement.volume = this.state.audioVolume
 
 
-                divElement.style.backgroundColor = 'red';
+                divElement.style.backgroundColor = 'aqua';
                 divElement.style.transform = 'scale(0.9)';
 
                 document.addEventListener('keyup', this.handleKeyUp)
@@ -168,21 +168,28 @@ class App extends React.Component {
 
     handleClickPlayMode() {
 
-        this.setState({
-            playMode: !this.state.playMode,
+        if (this.state.power) {
 
-        })
-
-        if (this.state.playMode) {
 
             this.setState({
-                audioId: 'Heater Kit'
+                playMode: !this.state.playMode,
+
             })
+
+            if (this.state.playMode) {
+
+                this.setState({
+                    audioId: 'Heater Kit'
+                })
+
+            } else {
+                this.setState({
+                    audioId: 'Smooth Piano Kit'
+                })
+            }
 
         } else {
-            this.setState({
-                audioId: 'Smooth Piano Kit'
-            })
+            return;
         }
 
         console.log(this.state.playMode);
@@ -244,31 +251,38 @@ class App extends React.Component {
 
                     <div className="pad-bank">{this.state.playMode ? SmoothList : HeaterList}</div>
 
+                    <div className="container-logo-control">
 
-                    <div className="logo">
 
-                    </div>
+                        <div className="logo-wrapper">
+                            <span>FCC</span>
+                            <i className="fab fa-free-code-camp"></i>
+                        </div>
 
-                    <div className="control-wrapper">
+                        <div className="control-wrapper">
 
-                        <div className="control_power">
-                            <div>Power</div>
-                            <div onClick={this.handleClickPower} style={{ 'justifyContent': this.state.power ? 'flex-end' : 'flex-start' }} className="select">
-                                <div className="select-on-off"></div>
+                            <div className="control_power">
+                                <div>Power</div>
+                                <div onClick={this.handleClickPower} style={{ 'justifyContent': this.state.power ? 'flex-end' : 'flex-start' }} className="select">
+                                    <div className="select-on-off"></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="control_display" id="display">{this.state.audioId}</div>
+                            <div className="control_display" id="display">
+                                <p>{this.state.audioId}</p>
+                            </div>
 
-                        <div className="control_volume">
-                            <input id="volumnId" onChange={this.changeVolume} value={this.state.audioVolume} type="range" min="0" step="0.01" max="1"></input>
-                        </div>
+                            <div className="control_volume">
+                                <input className="slider" id="volumnId" onChange={this.changeVolume} value={this.state.audioVolume} type="range" min="0" step="0.01" max="1" />
+                            </div>
 
-                        <div className="control_play-mode control_power">
-                            <div>Bank</div>
+                            <div className="control_play-mode control_power">
+                                <div>Bank</div>
 
-                            <div onClick={this.handleClickPlayMode} style={{ 'justifyContent': this.state.playMode ? 'flex-end' : 'flex-start' }} className="select">
-                                <div className="select-on-off"></div>
+                                <div onClick={this.handleClickPlayMode} style={{ 'justifyContent': this.state.playMode ? 'flex-end' : 'flex-start' }} className="select">
+                                    <div className="select-on-off"></div>
+                                </div>
+
                             </div>
 
                         </div>

@@ -1,7 +1,15 @@
+$base-color: aqua;
+$button-color: blue;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+
+    font-family: Russo One;
 }
 
 .app-wrapper {
@@ -42,8 +50,6 @@
 
 
 
-
-
                 span {
 
                     display: inline-block;
@@ -51,7 +57,7 @@
             }
 
             .drum-pad-power-on:active {
-                background-color: red;
+                background-color: $base-color;
                 transform: scale(0.9);
             }
 
@@ -65,46 +71,113 @@
         }
 
 
-        .control-wrapper {
+        .container-logo-control {
+
+            flex: 1;
+            text-align: center;
+
+
+            .logo-wrapper {
+
+                font-size: 25px;
+                float: right;
+                margin: 10px 15px 15px 0;
+
+                span,
+                i {
+                    display: inline-block;
+                    font-style: italic;
+                    font-weight: 700;
+                }
+
+                span {
+                    margin-right: 10px;
+                }
+
+
+            }
+
+
+            .control-wrapper {
 
 
 
-            .control_power {
+                .control_power {
 
-                .select {
-                    width: 54px;
-                    height: 25px;
-                    background-color: black;
-                    margin-bottom: 20px;
+                    clear: right;
+
+
+                    .select {
+                        width: 54px;
+                        height: 25px;
+                        background-color: black;
+                        margin: 0 auto 20px;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 4px;
+
+
+                        :hover {
+                            cursor: pointer;
+                        }
+
+                        .select-on-off {
+                            width: 23px;
+                            height: 19px;
+                            background-color: blue;
+                            align-self: center;
+
+
+                        }
+                    }
+
+                }
+
+
+                .control_display {
+                    width: 205px;
+                    height: 50px;
+                    background-color: grey;
+                    margin: 0 auto 25px;
                     display: flex;
                     align-items: center;
-                    padding: 0 4px;
+                    justify-content: center;
 
-                    .select-on-off {
-                        width: 23px;
-                        height: 19px;
-                        background-color: blue;
-                        align-self: center;
+                }
+
+                .control_volume {
+
+                    [type='range'] {
+                        appearance: none;
+                        width: 240px;
+                        height: 5px;
+                        background: black;
+                        cursor: pointer;
+                        margin-bottom: 20px;
                     }
+
+                    .slider::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        width: 8px;
+                        height: 25px;
+                        background: $button-color;
+                        cursor: pointer;
+                    }
+
+                    .slider::-moz-range-thumb {
+                        width: 8px;
+                        height: 25px;
+                        background: $button-color;
+                        cursor: pointer;
+                    }
+
                 }
 
             }
 
 
-            .control_display {
-                width: 200px;
-                height: 30px;
-                background-color: aquamarine;
-                margin-bottom: 30px;
-
-
-            }
-
-
-
         }
-
-
 
 
     }

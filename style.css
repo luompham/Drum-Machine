@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: Russo One;
+}
+
 .app-wrapper {
   display: flex;
   justify-content: center;
@@ -41,32 +45,81 @@
   display: inline-block;
 }
 .app-wrapper .drum-pad-container .pad-bank .drum-pad-power-on:active {
-  background-color: red;
+  background-color: aqua;
   transform: scale(0.9);
 }
 .app-wrapper .drum-pad-container .pad-bank .drum-pad-power-off:active {
   transform: scale(0.9);
 }
-.app-wrapper .drum-pad-container .control-wrapper .control_power .select {
+.app-wrapper .drum-pad-container .container-logo-control {
+  flex: 1;
+  text-align: center;
+}
+.app-wrapper .drum-pad-container .container-logo-control .logo-wrapper {
+  font-size: 25px;
+  float: right;
+  margin: 10px 15px 15px 0;
+}
+.app-wrapper .drum-pad-container .container-logo-control .logo-wrapper span,
+.app-wrapper .drum-pad-container .container-logo-control .logo-wrapper i {
+  display: inline-block;
+  font-style: italic;
+  font-weight: 700;
+}
+.app-wrapper .drum-pad-container .container-logo-control .logo-wrapper span {
+  margin-right: 10px;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_power {
+  clear: right;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_power .select {
   width: 54px;
   height: 25px;
   background-color: black;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   padding: 0 4px;
 }
-.app-wrapper .drum-pad-container .control-wrapper .control_power .select .select-on-off {
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_power .select :hover {
+  cursor: pointer;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_power .select .select-on-off {
   width: 23px;
   height: 19px;
   background-color: blue;
   align-self: center;
 }
-.app-wrapper .drum-pad-container .control-wrapper .control_display {
-  width: 200px;
-  height: 30px;
-  background-color: aquamarine;
-  margin-bottom: 30px;
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_display {
+  width: 205px;
+  height: 50px;
+  background-color: grey;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_volume [type=range] {
+  appearance: none;
+  width: 240px;
+  height: 5px;
+  background: black;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_volume .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 25px;
+  background: blue;
+  cursor: pointer;
+}
+.app-wrapper .drum-pad-container .container-logo-control .control-wrapper .control_volume .slider::-moz-range-thumb {
+  width: 8px;
+  height: 25px;
+  background: blue;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
