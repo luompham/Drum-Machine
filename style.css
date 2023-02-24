@@ -12,12 +12,14 @@ body {
   display: flex;
   justify-content: center;
   height: 100vh;
+  background-color: #8d8d8d;
 }
 .app-wrapper .drum-pad-container {
   width: 670px;
   margin: auto;
   background-color: #b3b3b3;
   display: flex;
+  border: 5px solid blue;
 }
 .app-wrapper .drum-pad-container .pad-bank {
   width: 335px;
